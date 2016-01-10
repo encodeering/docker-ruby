@@ -7,4 +7,8 @@ TAGSPECIFIER="$VERSION"
 
 docker login -e "$DOCKER_EMAIL" -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
-docker push "$TAG:$TAGSPECIFIER"
+if [ "$ONBUILD" = true ]; then
+    docker push "$TAG:$TAGSPECIFIER-onbuild"
+else
+    docker push "$TAG:$TAGSPECIFIER"
+fi
