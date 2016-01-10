@@ -1,0 +1,23 @@
+--- 2.3/Dockerfile	2016-01-10 10:43:44.438971700 +0000
++++ 2.3/Dockerfile	2016-01-10 10:59:53.958458200 +0000
+@@ -20,8 +20,9 @@
+ 	&& rm ruby.tar.gz \
+ 	&& cd /usr/src/ruby \
+ 	&& autoconf \
+-	&& ./configure --disable-install-doc \
+-	&& make -j"$(nproc)" \
++	&& ./configure --disable-install-doc
++
++ONBUILD RUN cd /usr/src/ruby && make -j"$(nproc)" \
+ 	&& make install \
+ 	&& apt-get purge -y --auto-remove bison libgdbm-dev ruby \
+ 	&& gem update --system $RUBYGEMS_VERSION \
+@@ -33,7 +34,7 @@
+ 
+ ENV BUNDLER_VERSION 1.11.2
+ 
+-RUN gem install bundler --version "$BUNDLER_VERSION" \
++ONBUILD RUN gem install bundler --version "$BUNDLER_VERSION" \
+ 	&& bundle config --global path "$GEM_HOME" \
+ 	&& bundle config --global bin "$GEM_HOME/bin"
+ 

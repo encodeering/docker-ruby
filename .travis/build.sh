@@ -9,6 +9,8 @@ if [ "$ONBUILD" = true ]; then
     docker pull   "$REPOSITORY/buildpack-$ARCH:jessie"
     docker tag -f "$REPOSITORY/buildpack-$ARCH:jessie" "buildpack-deps:jessie"
 
+    patch -p0 --no-backup-if-mismatch --directory=$PROJECT < .patch/$VERSION/Dockerfile.patch
+
     docker build -t "$TAG:$TAGSPECIFIER-onbuild" "$PROJECT/$VERSION"
 else
     echo       "FROM $TAG:$TAGSPECIFIER-onbuild" > Dockerfile.onbuild
