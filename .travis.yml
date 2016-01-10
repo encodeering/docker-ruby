@@ -4,3 +4,27 @@ sudo: required
 
 services:
 - docker
+
+env:
+  global:
+    - secure: "RdEi5lo0E6Z0IS9ZjYEOmuhYIFPs8LLWQ/pCiSJHMGqCRKKSrLPv7WVLvcsrroX2frz0U0A7GAVJr5It8oYDloNVgXFYyJNEx0VbE1R7qdenb+/WN6iM72t6Malu924Aq78NTZKIaxdv62yy0duDnmeQ7Wh8t76K8VkyOCRs/d7M+sqdajFCahq/EYfc7PiLwIf7GqIpU1RVebQE3LaH04eSQrmozdbPOZOsCCAEH6wKMdg0TieeE/6oy0xjLvRgFdVa+kIyhabM2W+J/PArXJRE1A9Ep1Y19Nu1n3oB69yZgLQoBaAe1hOYwRsHJkXjxsMGcAtjQu6PBebpGnWM4tyqZvAeiukc1kHCihzSe/ge6yyteIwM7VT6LzdDXJP3FyJ9OkkZLlhQvdUnB5SV/gMpY1KXXjpJpzqTBrPyyj8ndzYviTDroazIHtkhcz9ZEnzM71A2V14nouCGKgoYbrZ2rmTPzRjrTz7PyhV7JRWH05pBKD4DMEkdT/pXM9dtekCDlM1DYX185ZSUp8bd0WMAR/8i9qAJwKDlsihbu+4MbDbSY/3a5gnmyjxYRwMEmH4eJsaZ+HRjet5EpjdzGH729t1RSb29B78YaQs0lb6kJjRYP9iuANwBwBcEsd4ZO7BCwDESP6c0D0LH66OvnrSLo/qwDhQXogt5Is79lLI="
+    - secure: "drGnNlswMAaqrS1gNhCwKU8gmk4i1ADGQAoYJaakluuABeSAcETrwskpG7IK6Xbs1sxrQwIUwKtp7RQfaKGPUc3f2S2P8WUE+V3yd13NduzWTDX+teh375v1XrUV0l2qO3/iI54luF/GwgY5aiVpP7X1rM3/nf70aa+G1hsLfWaoCmYQyI9z18wTfFYrqfA/2q7HAzD2EgYuYYOyv3NQJxrCKko5v77AzcjPvPr47AEtcZLPqT59ZlbFhpO5xEJQTxjYWvEKv/+oNCp3E5JKSAfKRfLqduoMsCkeXMLG15PDZEKhturlqZNz13TBPtBRH6155K1/twopVVAtgpai3YyN0dUx69I30gHCpsLHEx8dtJGtcUNgcR8SKnB+/DNR57I9JDFgs8x+JkJBAwOXF7U5hnS/DOZ+o89mensA1N0JmN9se2+qaZQAJwN3Vusez+ezdOwohBX5O4v92NpyA0rLZzyoWJnYZIy9EBqnRS435XweKFxxiGCIAaMTxXN5D8Vu221tJa736U0j6rmzQllQp7n6LnVUIgFowIoVbu79J6hQwbylATWrd/HMio8/BDBY6BlGS2rmJSR2kRDC4/LXT0Bji0MqBLuHUzItnWZFsYi9e5AVZlIQrmF2qjoCBlSB04XecPIilnl9eYM5JuFxkfN7rSAySYOKEOYxOS8="
+    - secure: "YXXWgJSOEIamt3kCeIOglyhTdqneTnbBpy3fY4U85CTvTRFWXHEcVXVh/sGIxD3NXaq56x6ZHsu5cc0SEk+mad67jGgjWLYwK49fg4pTG+632suqyzqkoF1K7GLT9vP/TNbq4+jYdg999IkaMpmYR8/WYWMeq1ts3j7nTl4Lq1ZP8x913vudI+fTKs7I1HC8pM+/PN167cABKaBnPQddx65Z4o+biBZokXAWLoJT0zju/znixNZl89P8P7xixSXGc80jmhfVWTs9r0/2w2ohhqWA9d2fQ6FLtLcKahF0XlzgMb3utiq/uG3DCrJ2099XnaGf5CIK7xhMUAzWfc4niHmx1zQOOeJ13J4d8BnFl8D5MwUzNnznrpnD40dRsRLFX/dHCEwrr36yY12Sn88BaXOfydmT3u0CSwQkfhW617QQylhjzX4Mcr+xXLC7ho696Tcaa+pySGA4zK7sThzUs+EzsYLPHzCLK98fdtbskV72UMJ4hMYhGXnBF1BJAEn15i7otPligPMjjajEL60PekrBCDR7K9vTxucuZXfBvL9togIlMXkzj0qzx8VdPJXu/NgZXiJFdvhs7v9gFLX7KwTdQHwA8fnPfOs/n2BDT5NKRiLeNEbPb5oAOpK29oeTJqFoNpTd1guHsozEJNhl0Du8waOQmgC35sfxSDduWCA="
+    - PROJECT="ruby"
+    - REPOSITORY="encodeering"
+  matrix:
+    - ARCH=amd64 VERSION=2.3
+
+before_script:
+- sudo cat /proc/sys/fs/binfmt_misc/status
+- sudo sh -c "echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register"
+- git clone --depth 1 https://github.com/docker-library/ruby.git "$PROJECT"
+
+script:
+- sudo -E sh .travis/build.sh
+
+after_success:
+- sudo -E sh .travis/deploy.sh
+
+after_script:
+- docker images
