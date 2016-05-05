@@ -16,6 +16,6 @@ else
     echo       "FROM $TAG:$TAGSPECIFIER-onbuild" > Dockerfile.onbuild
     docker pull     "$TAG:$TAGSPECIFIER-onbuild"
     docker build -t "$TAG:$TAGSPECIFIER" -f Dockerfile.onbuild .
-fi
 
-docker run --rm "$TAG:$TAGSPECIFIER" ruby --version
+    docker run --rm "$TAG:$TAGSPECIFIER" ruby --version
+fi
