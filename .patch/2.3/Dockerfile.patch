@@ -1,44 +1,26 @@
 diff --git a/2.3/Dockerfile b/2.3/Dockerfile
-index 636dfdf..ace9e05 100644
+index 2320f7f..26b1ddd 100644
 --- a/2.3/Dockerfile
 +++ b/2.3/Dockerfile
-@@ -14,13 +14,13 @@ ENV RUBYGEMS_VERSION 2.6.4
- 
- # some of ruby's build scripts are written in ruby
- # we purge this later to make sure our final image uses what we just built
+@@ -17,2 +17 @@ ENV RUBYGEMS_VERSION 2.6.4
 -RUN set -ex \
 -	&& buildDeps=' \
 +ENV buildDeps=' \
- 		bison \
- 		libgdbm-dev \
- 		ruby \
+@@ -22,2 +21,3 @@ RUN set -ex \
 -	' \
 -	&& apt-get update \
 +	'
 +RUN set -ex \
 +    && apt-get update \
- 	&& apt-get install -y --no-install-recommends $buildDeps \
- 	&& rm -rf /var/lib/apt/lists/* \
- 	&& curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz" \
-@@ -31,16 +31,17 @@ RUN set -ex \
- 	&& cd /usr/src/ruby \
- 	&& { echo '#define ENABLE_PATH_CHECK 0'; echo; cat file.c; } > file.c.new && mv file.c.new file.c \
- 	&& autoconf \
+@@ -34,2 +34,2 @@ RUN set -ex \
 -	&& ./configure --disable-install-doc \
 -	&& make -j"$(nproc)" \
 +	&& ./configure --disable-install-doc
 +ONBUILD RUN cd /usr/src/ruby && make -j"$(nproc)" \
- 	&& make install \
- 	&& apt-get purge -y --auto-remove $buildDeps \
- 	&& gem update --system $RUBYGEMS_VERSION \
+@@ -39 +39,2 @@ RUN set -ex \
 -	&& rm -r /usr/src/ruby
 +	&& rm -r /usr/src/ruby \
 +	&& unset buildDeps
- 
- ENV BUNDLER_VERSION 1.12.2
- 
+@@ -43 +44 @@ ENV BUNDLER_VERSION 1.12.4
 -RUN gem install bundler --version "$BUNDLER_VERSION"
 +ONBUILD RUN gem install bundler --version "$BUNDLER_VERSION"
- 
- # install things globally, for great justice
- # and don't create ".bundle" in all our apps
