@@ -13,6 +13,7 @@ env:
     - PROJECT="ruby"
     - REPOSITORY="encodeering"
     - BRANCH="$TRAVIS_BRANCH"
+    - COMMIT="2d6449f03976ededa14be5cac1e9e070b74e4de4"
   matrix:
     #- ARCH=armhf VERSION=2.3 ONBUILD=true
     - ARCH=amd64 VERSION=2.3 ONBUILD=true
@@ -24,7 +25,8 @@ matrix:
 
 before_script:
 - sudo -E sh .travis/prepare.sh
-- git clone --depth 1 https://github.com/docker-library/ruby.git "$PROJECT"
+- git clone https://github.com/docker-library/ruby.git "$PROJECT"
+- (cd "$PROJECT" && git checkout "$COMMIT")
 
 script:
 - sudo -E sh .travis/build.sh
