@@ -13,7 +13,7 @@ env:
     - PROJECT="ruby"
     - REPOSITORY="encodeering"
     - BRANCH="$TRAVIS_BRANCH"
-    - COMMIT="2d6449f03976ededa14be5cac1e9e070b74e4de4"
+    - COMMIT="e23879898862f2426e6714324c912d14db1067b5"
   matrix:
     - ARCH=amd64 VERSION=2.3
 
