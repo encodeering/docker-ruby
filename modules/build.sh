@@ -11,8 +11,13 @@ set -e
 import com.encodeering.docker.config
 import com.encodeering.docker.docker
 
-docker-pull "$REPOSITORY/buildpack-$ARCH:jessie" "buildpack-deps:jessie"
+case "$VERSION" in
+    2.3) FROM=jessie;   TO=jessie  ;;
+    2.5) FROM=stretch ; TO=stretch ;;
+esac
 
-docker build -t "$DOCKER_IMAGE" "$PROJECT/$VERSION/jessie"
+docker-pull "$REPOSITORY/buildpack-$ARCH:$FROM" "buildpack-deps:$TO"
+
+docker build -t "$DOCKER_IMAGE" "$PROJECT/$VERSION/$FROM"
 
 docker run --rm "$DOCKER_IMAGE" ruby --version
