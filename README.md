@@ -1,6 +1,7 @@
 ## Automatically created docker image for ruby
 
 [![Build Status](https://travis-ci.org/encodeering/docker-ruby.svg?branch=master)](https://travis-ci.org/encodeering/docker-ruby)
+[![Build Status](https://semaphoreci.com/api/v1/encodeering/docker-ruby/branches/master/shields_badge.svg)](https://semaphoreci.com/encodeering/docker-ruby)
 
 ### Docker ([Origin](https://github.com/docker-library/ruby))
 
