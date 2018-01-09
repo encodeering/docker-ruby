@@ -13,7 +13,6 @@ env:
     - PROJECT="ruby"
     - REPOSITORY="encodeering"
     - BRANCH="$TRAVIS_BRANCH"
-    - COMMIT="ca5366d8e8afa5f6cf810a07740a50e1f4eeab36"
   matrix:
     - BASE=debian ARCH=amd64 VERSION=2.3
     - BASE=debian ARCH=amd64 VERSION=2.5
@@ -23,10 +22,10 @@ matrix:
   fast_finish: true
 
 install:
-- bash <(curl https://raw.githubusercontent.com/encodeering/docker-ci/master/install.sh) 0.1.5
+- bash <(curl https://raw.githubusercontent.com/encodeering/docker-ci/master/install.sh) 0.1.6
 
 before_script:
-- sudo -E bash ./module.sh "." "./setup.sh" "https://github.com/docker-library/ruby.git" "modules/$PROJECT" "$COMMIT"
+- sudo -E bash ./module.sh "." "./setup.sh"
 
 script:
 - sudo -E bash ./module.sh "modules" "./build.sh"
