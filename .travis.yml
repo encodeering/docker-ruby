@@ -22,7 +22,7 @@ matrix:
   fast_finish: true
 
 install:
-- bash <(curl https://raw.githubusercontent.com/encodeering/docker-ci/master/install.sh) 0.1.6
+- bash <(curl https://raw.githubusercontent.com/encodeering/docker-ci/master/install.sh) 0.1.7
 
 before_script:
 - sudo -E bash ./module.sh "." "./setup.sh"

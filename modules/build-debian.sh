@@ -2,8 +2,8 @@
 
 set -e
 
-import com.encodeering.docker.config
-import com.encodeering.docker.docker
+import com.encodeering.ci.config
+import com.encodeering.ci.docker
 
 case "$VERSION" in
     2.3) FROM=jessie;   TO=jessie  ;;
@@ -12,4 +12,4 @@ esac
 
 docker-pull "$REPOSITORY/buildpack-$ARCH:$FROM" "buildpack-deps:$TO"
 
-docker build -t "$DOCKER_IMAGE" "$PROJECT/$VERSION/$FROM"
+docker-build "$PROJECT/$VERSION/$FROM"
