@@ -12,7 +12,6 @@ env:
     - secure: "YXXWgJSOEIamt3kCeIOglyhTdqneTnbBpy3fY4U85CTvTRFWXHEcVXVh/sGIxD3NXaq56x6ZHsu5cc0SEk+mad67jGgjWLYwK49fg4pTG+632suqyzqkoF1K7GLT9vP/TNbq4+jYdg999IkaMpmYR8/WYWMeq1ts3j7nTl4Lq1ZP8x913vudI+fTKs7I1HC8pM+/PN167cABKaBnPQddx65Z4o+biBZokXAWLoJT0zju/znixNZl89P8P7xixSXGc80jmhfVWTs9r0/2w2ohhqWA9d2fQ6FLtLcKahF0XlzgMb3utiq/uG3DCrJ2099XnaGf5CIK7xhMUAzWfc4niHmx1zQOOeJ13J4d8BnFl8D5MwUzNnznrpnD40dRsRLFX/dHCEwrr36yY12Sn88BaXOfydmT3u0CSwQkfhW617QQylhjzX4Mcr+xXLC7ho696Tcaa+pySGA4zK7sThzUs+EzsYLPHzCLK98fdtbskV72UMJ4hMYhGXnBF1BJAEn15i7otPligPMjjajEL60PekrBCDR7K9vTxucuZXfBvL9togIlMXkzj0qzx8VdPJXu/NgZXiJFdvhs7v9gFLX7KwTdQHwA8fnPfOs/n2BDT5NKRiLeNEbPb5oAOpK29oeTJqFoNpTd1guHsozEJNhl0Du8waOQmgC35sfxSDduWCA="
     - PROJECT="ruby"
     - REPOSITORY="encodeering"
-    - BRANCH="$TRAVIS_BRANCH"
   matrix:
     - BASE=debian ARCH=amd64 VERSION=2.3
     - BASE=debian ARCH=amd64 VERSION=2.5
@@ -22,7 +21,7 @@ matrix:
   fast_finish: true
 
 install:
-- bash <(curl https://raw.githubusercontent.com/encodeering/docker-ci/master/install.sh) 0.1.7
+- bash <(curl https://raw.githubusercontent.com/encodeering/docker-ci/master/install.sh) 0.1.8
 
 before_script:
 - sudo -E bash ./module.sh "." "./setup.sh"
