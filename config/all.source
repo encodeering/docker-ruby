@@ -1,3 +1,3 @@
 SCM_SOURCE=https://github.com/docker-library/ruby.git
 SCM_TARGET=modules/$PROJECT
-SCM_COMMIT=560729409481a839a89676db56519d099fcca094
+SCM_COMMIT=e7d27d514f15f3bffdc7fac383a8b83494317d47
