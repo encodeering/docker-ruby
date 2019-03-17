@@ -7,4 +7,4 @@ import com.encodeering.ci.docker
 
 ./build-${BASE}.sh
 
-docker-verify ruby --version
+docker-verify ruby --version | dup | contains "ruby ${VERSION}"
