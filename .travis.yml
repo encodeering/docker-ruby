@@ -13,7 +13,6 @@ env:
     - PROJECT="ruby"
     - REPOSITORY="encodeering"
   matrix:
-    - BASE=debian ARCH=amd64 VERSION=2.3
     - BASE=debian ARCH=amd64 VERSION=2.5
     - BASE=alpine ARCH=amd64 VERSION=2.5
 
